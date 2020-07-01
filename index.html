@@ -59,27 +59,35 @@
 
       function openWindow() {}
 
-      async function getFriendship() {}
+      async function getFriendship() {
+        const friend = await liff.getFriendship();
+        document.getElementById("friendship").append(friend.friendFlag);
+        if (friend.friendFlag) {
+          if (confirm("คุณยังไม่ได้เพิ่ม BOT เป็นเพื่อน จะเพิ่มเลยไหม?")) {
+            window.location = "https://line.me/R/ti/p/@018ygyp";
+          }
+        }
+      }
 
       async function sendMsg() {
-        if(liff.getContext().type !== "none") {
+        if (liff.getContext().type !== "none") {
           await liff.sendMessages([
             {
-              "type": "sticker",
-              "stickerId": 1,
-              "packageId": 1,
-            }
-          ])
-          alert("Message sent")
+              type: "sticker",
+              stickerId: 1,
+              packageId: 1,
+            },
+          ]);
+          alert("Message sent");
         }
       }
 
       function getContext() {
-        document.getElementById("type").append(liff.getContext().type)
-        document.getElementById("viewType").append(liff.getContext().viewType)
-        document.getElementById("utouId").append(liff.getContext().utouId)
-        document.getElementById("roomId").append(liff.getContext().roomId)
-        document.getElementById("groupId").append(liff.getContext().groupId)
+        document.getElementById("type").append(liff.getContext().type);
+        document.getElementById("viewType").append(liff.getContext().viewType);
+        document.getElementById("utouId").append(liff.getContext().utouId);
+        document.getElementById("roomId").append(liff.getContext().roomId);
+        document.getElementById("groupId").append(liff.getContext().groupId);
       }
 
       async function getUserProfile() {
@@ -88,7 +96,9 @@
         document.getElementById("userId").append(profile.userId);
         document.getElementById("statusMessage").append(profile.statusMessage);
         document.getElementById("displayName").append(profile.displayName);
-        document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+        document
+          .getElementById("decodedIDToken")
+          .append(liff.getDecodedIDToken().email);
       }
 
       function getEnvironment() {
@@ -111,8 +121,8 @@
         await liff.init({ liffId: "1654405971-KLO0yxrw" });
         getEnvironment();
         getUserProfile();
-        getContext()
-        // getFriendship()
+        getContext();
+        getFriendship();
         // createUniversalLink()
       }
       main();
