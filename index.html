@@ -54,7 +54,7 @@
       function logOut() {}
 
       function closed() {
-        liff.closeWindow()
+        liff.closeWindow();
       }
 
       async function scanCode() {
@@ -129,10 +129,13 @@
 
       async function main() {
         await liff.init({ liffId: "1654405971-KLO0yxrw" });
-        getEnvironment();
-        getUserProfile();
-        getContext();
-        getFriendship();
+        document.getElementById("isLoggedIn").append(liff.isLoggedIn());
+        if (liff.isLoggedIn()) {
+          getEnvironment();
+          getUserProfile();
+          getContext();
+          getFriendship();
+        }
         // createUniversalLink()
       }
       main();
